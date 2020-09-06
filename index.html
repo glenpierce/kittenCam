@@ -12,15 +12,15 @@
                     return `0${monthNumber + 1}`;
                 return monthNumber + 1;
             }
-            function getDate(dateNumber) {
-                if(dateNumber < 9)
-                    return `0${dateNumber}`;
-                return dateNumber;
+            function getTwoDigitNumber(number) {
+                if(number < 9)
+                    return `0${number}`;
+                return number;
             }
-            const prefix = `https://pegasuskittens.s3-us-west-2.amazonaws.com/${now.getFullYear()}-${getMonth(now.getMonth())}-${getDate(now.getDate())}_`;
-            let postfix = now.getHours().toString() + now.getMinutes().toString();
-            let limit = 21;
-            for(let i = postfix; postfix > 0 && limit > 0; postfix--) {
+            const prefix = `https://pegasuskittens.s3-us-west-2.amazonaws.com/${now.getFullYear()}-${getMonth(now.getMonth())}-${getTwoDigitNumber(now.getDate())}_`;
+            for(let i = 1; i < 21; i++) {
+                const then = new Date(now - i * 60000);
+                let postfix = getTwoDigitNumber(then.getHours()).toString() + getTwoDigitNumber(then.getMinutes()).toString();
                 const image = new Image();
                 image.style.display = "none";
                 image.onload = function() {
@@ -31,7 +31,6 @@
                 }
                 image.src = prefix + postfix + ".jpg";
                 document.getElementById("container").appendChild(image);
-                limit--;
             }
         }
     </script>
