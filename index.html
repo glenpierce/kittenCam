@@ -8,12 +8,12 @@
             function getMonth(monthNumber) {
                 if(monthNumber == 0)
                     return `01`;
-                if(monthNumber < 9)
+                if(monthNumber < 10)
                     return `0${monthNumber + 1}`;
                 return monthNumber + 1;
             }
             function getTwoDigitNumber(number) {
-                if(number < 9)
+                if(number < 10)
                     return `0${number}`;
                 return number;
             }
