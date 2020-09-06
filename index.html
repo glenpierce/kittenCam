@@ -1,0 +1,43 @@
+<html>
+<head>
+</head>
+<body>
+    <script>
+        window.onload = function() {
+            const now = new Date();
+            function getMonth(monthNumber) {
+                if(monthNumber == 0)
+                    return `01`;
+                if(monthNumber < 9)
+                    return `0${monthNumber + 1}`;
+                return monthNumber + 1;
+            }
+            function getDate(dateNumber) {
+                if(dateNumber < 9)
+                    return `0${dateNumber}`;
+                return dateNumber;
+            }
+            const prefix = `https://pegasuskittens.s3-us-west-2.amazonaws.com/${now.getFullYear()}-${getMonth(now.getMonth())}-${getDate(now.getDate())}_`;
+            let postfix = now.getHours().toString() + now.getMinutes().toString();
+            let limit = 21;
+            for(let i = postfix; postfix > 0 && limit > 0; postfix--) {
+                const image = new Image();
+                image.style.display = "none";
+                image.onload = function() {
+                    if(this.width + this.height > 0)
+                        image.style.display = "block";
+                        image.style.width = "300px";
+                        image.style.margin = "10px";
+                }
+                image.src = prefix + postfix + ".jpg";
+                document.getElementById("container").appendChild(image);
+                limit--;
+            }
+        }
+    </script>
+
+    <div id="container" style="display: flex; flex-direction: column; align-items: center;">
+
+    </div>
+</body>
+</html>
